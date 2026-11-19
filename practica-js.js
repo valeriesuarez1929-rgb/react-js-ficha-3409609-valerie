@@ -68,27 +68,80 @@ console.log(buscarProducto(3));
 console.log(buscarProducto(5));
 console.log(buscarProducto(8));
 
+
+console.log("==== so ===")
+
+
+const hayAgotados = productos.some(
+  producto => producto.stock === 0
+);
+
 const hayProductoMillon = productos.some(
-    productos => productos.precio > 1000000
+  producto => producto.precio > 1000000
 );
 
 const preciosValidos = productos.every(
-    producto => producto.precio > 0
+  producto => producto.precio > 0
 );
 
 const stockValido = productos.every(
-    producto => producto.stock >= 0
+  producto => producto.stock >= 0
 );
 
 const valorInventario = productos.reduce(
-    (total,producto) => total + (producto.precio * producto.stock),
-    0
+  (total, producto) => total + (producto.precio * producto.stock),
+  0
 );
 
-console.log("¿existe  algun producto agota?",hayAgotados);
-console.log("¿existe algun producto con precio mayor a $1000000",
-hayProductoMillon);
-console.log("¿todos los productos precio mayor que cree?",preciosValidos);
-console.log("¿todos los productos tiene stock mayor o igual que cero?",
-    stockValido);
-    console.log("valor total del inventario:",valorInventario);
+console.log("¿Existe algún producto agotado?", hayAgotados);
+console.log("¿Existe algún producto con precio mayor a $1.000.000?", hayProductoMillon);
+console.log("¿Todos los productos tienen precio mayor que cero?", preciosValidos);
+console.log("¿Todos los productos tienen stock mayor o igual que cero?", stockValido);
+console.log("Valor total del inventario:", valorInventario);
+
+console.log("==== javascript moderno ====")
+
+
+console.log(
+  `El producto ${productos[0].nombre} cuesta $${productos[0].precio}`
+);
+
+
+const { nombre, precio, stock } = productos[0];
+
+console.log(nombre, precio, stock);
+
+
+
+const productoActualizado = {
+  ...productos[0],
+  precio: 65000,
+  stock: 8
+};
+
+console.log(productoActualizado);
+
+
+
+const estado =
+  productoActualizado.stock > 0
+    ? "Disponible"
+    : "Agotado";
+
+console.log(estado);
+
+
+const productoModificado = {
+  ...productos[2],
+  precio: 700000,
+  stock: 10
+};
+
+const estadoProducto =
+  productoModificado.stock > 0
+    ? "Disponible"
+    : "Agotado";
+
+console.log(
+  `El producto ${productoModificado.nombre} cuesta $${productoModificado.precio} y se encuentra ${estadoProducto}`
+);
